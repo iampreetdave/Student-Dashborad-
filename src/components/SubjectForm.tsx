@@ -33,7 +33,7 @@ const SubjectForm: React.FC<SubjectFormProps> = ({ onAddSubject }) => {
         value={name}
         onChange={(e) => setName(e.target.value)}
         placeholder="Subject Name"
-        className="flex-1 p-2 border rounded"
+        className="flex-1 p-2 border rounded bg-white text-black dark:bg-white dark:text-black" // ✅ Always white input & black text
         required
       />
       <input
@@ -43,7 +43,7 @@ const SubjectForm: React.FC<SubjectFormProps> = ({ onAddSubject }) => {
         placeholder="Marks"
         min="0"
         max="100"
-        className="w-24 p-2 border rounded"
+        className="w-24 p-2 border rounded bg-white text-black dark:bg-white dark:text-black" // ✅ Always white input & black text
         required
       />
       <input
@@ -53,7 +53,7 @@ const SubjectForm: React.FC<SubjectFormProps> = ({ onAddSubject }) => {
         placeholder="Year"
         min="2000"
         max="2100"
-        className="w-28 p-2 border rounded"
+        className="w-28 p-2 border rounded bg-white text-black dark:bg-white dark:text-black" // ✅ Always white input & black text
         required
       />
       <button

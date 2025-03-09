@@ -92,7 +92,7 @@ const PomodoroTimer: React.FC = () => {
   const progress = ((timer.mode === 'work' ? 25 : 5) * 60 - (timer.minutes * 60 + timer.seconds)) / ((timer.mode === 'work' ? 25 : 5) * 60) * 100;
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md relative overflow-hidden">
+    <div className="bg-white text-black dark:bg-white dark:text-black p-6 rounded-lg shadow-md relative overflow-hidden"> {/* ✅ Keeps it white */}
       <div className={`absolute bottom-0 left-0 h-1 bg-blue-500 transition-all duration-1000 ease-linear`} style={{ width: `${progress}%` }}></div>
       
       <h2 className={`text-2xl font-bold mb-4 text-center transition-colors duration-300 ${timer.mode === 'work' ? 'text-blue-600' : 'text-green-600'}`}>
