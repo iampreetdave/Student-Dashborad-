@@ -18,7 +18,10 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+
+    /* Fix for missing Babel core type */
+    "types": ["@types/babel__core"]
   },
   "include": ["src"]
 }
