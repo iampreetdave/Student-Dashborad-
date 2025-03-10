@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { Subject } from './types';
 import PomodoroTimer from './components/PomodoroTimer';
-import TodoList from './components/TodoList'; // ✅ Import To-Do List
+import TodoList from './components/TodoList';
 import SubjectForm from './components/SubjectForm';
 import SubjectList from './components/SubjectList';
 import GradeAnalysis from './components/GradeAnalysis';
 import EditModal from './components/EditModal';
 import { GraduationCap } from 'lucide-react';
 import DarkModeToggle from './components/DarkModeToggle';
+import QuoteBox from './components/QuoteBox';
+
+/* 🔥 Global variables to persist tab references across re-renders */
+let googleDriveTab: Window | null = null;
+let googleCalendarTab: Window | null = null;
 
 function App() {
   const [subjects, setSubjects] = useState<Subject[]>([]);
@@ -37,14 +42,28 @@ function App() {
     ));
   };
 
+  /* ✅ Reuse Google Drive Tab */
   const openGoogleDrive = () => {
-    window.open('https://drive.google.com/', '_blank');
+    if (googleDriveTab && !googleDriveTab.closed) {
+      googleDriveTab.focus();
+    } else {
+      googleDriveTab = window.open('https://drive.google.com/', '_blank');
+    }
+  };
+
+  /* ✅ Reuse Google Calendar Tab */
+  const openGoogleCalendar = () => {
+    if (googleCalendarTab && !googleCalendarTab.closed) {
+      googleCalendarTab.focus();
+    } else {
+      googleCalendarTab = window.open('https://calendar.google.com/', '_blank');
+    }
   };
 
   return (
     <div className={`min-h-screen ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-gray-100 text-gray-900'}`}>
       <div className="container mx-auto px-4 py-8">
-        {/* Header with Dark Mode Toggle & Google Drive Button */}
+        {/* ✅ Header with ONLY ONE Google Drive Button */}
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center">
             <GraduationCap size={32} className="text-blue-600 mr-2" />
@@ -57,6 +76,12 @@ function App() {
               className="px-4 py-2 bg-blue-500 text-white rounded-md shadow-md hover:bg-blue-600 transition"
             >
               📂 Google Drive
+            </button>
+            <button
+              onClick={openGoogleCalendar}
+              className="px-4 py-2 bg-green-500 text-white rounded-md shadow-md hover:bg-green-600 transition"
+            >
+              📅 Google Calendar
             </button>
           </div>
         </div>
@@ -76,12 +101,19 @@ function App() {
           {/* Grade Analysis */}
           {subjects.length > 0 && <GradeAnalysis subjects={subjects} />}
 
-          {/* Pomodoro Timer & To-Do List Side by Side */}
+          {/* Pomodoro Timer, QuoteBox, and To-Do List */}
           <div className="flex flex-col md:flex-row gap-6">
-            {/* ✅ Both components will be displayed side by side on medium+ screens */}
-            <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md w-full md:w-1/2">
-              <PomodoroTimer />
+            {/* ✅ QuoteBox is above the Pomodoro Timer */}
+            <div className="flex flex-col w-full md:w-1/2 space-y-4">
+              <div className="bg-white dark:bg-gray-800 p-4 rounded-md shadow-md">
+                <QuoteBox />
+              </div>
+              <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
+                <PomodoroTimer />
+              </div>
             </div>
+
+            {/* ✅ To-Do List */}
             <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md w-full md:w-1/2">
               <TodoList />
             </div>

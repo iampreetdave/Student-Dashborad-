@@ -6,9 +6,9 @@ interface DarkModeToggleProps {
 }
 
 const DarkModeToggle: React.FC<DarkModeToggleProps> = ({ darkMode, setDarkMode }) => {
-  const openGoogleDrive = () => {
-    window.open('https://drive.google.com', '_blank');
-  };
+  //const openGoogleDrive = () => {
+ //   window.open('https://drive.google.com', '_blank');
+//  };
 
   return (
     <div className="flex items-center gap-4">
@@ -20,13 +20,7 @@ const DarkModeToggle: React.FC<DarkModeToggleProps> = ({ darkMode, setDarkMode }
         {darkMode ? '☀️ Light Mode' : '🌙 Dark Mode'}
       </button>
 
-      {/* Google Drive Button */}
-      <button
-        onClick={openGoogleDrive}
-        className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
-      >
-        Open Google Drive
-      </button>
+     
     </div>
   );
 };
