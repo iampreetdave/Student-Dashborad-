@@ -7,7 +7,8 @@
     "skipLibCheck": true,
 
     /* Bundler mode */
-    "moduleResolution": "bundler",
+    "moduleResolution": "Node",
+    "allowSyntheticDefaultImports": true,
     "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "moduleDetection": "force",
@@ -19,9 +20,24 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
+    "strictNullChecks": true,
 
-    /* Fix for missing Babel core type */
-    "types": ["@types/babel__core"]
+    /* Fix for missing types */
+    "types": ["node", "react", "react-dom"],
+
+    /* Alias for cleaner imports */
+    "baseUrl": "./src",
+    "paths": {
+      "@components/*": ["components/*"],
+      "@utils/*": ["utils/*"]
+    },
+
+    /* Allow importing JSON files */
+    "resolveJsonModule": true,
+
+    /* Fix Tailwind CSS issues */
+    "allowJs": true
   },
-  "include": ["src"]
+  "include": ["src", "tailwind.config.js", "postcss.config.js"],
+  "exclude": ["node_modules", "dist"]
 }

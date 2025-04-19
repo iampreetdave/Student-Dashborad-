@@ -9,6 +9,7 @@ import EditModal from './components/EditModal';
 import { GraduationCap } from 'lucide-react';
 import DarkModeToggle from './components/DarkModeToggle';
 import QuoteBox from './components/QuoteBox';
+import ChatBot from './components/ChatBot'; // ✅ Import Jarvis
 
 /* 🔥 Global variables to persist tab references across re-renders */
 let googleDriveTab: Window | null = null;
@@ -60,14 +61,20 @@ function App() {
     }
   };
 
+  /* ✅ Function to let Jarvis control Pomodoro Timer */
+  const handlePomodoroControl = (action: 'start' | 'pause' | 'reset') => {
+    const pomodoroEvent = new CustomEvent('pomodoroControl', { detail: action });
+    window.dispatchEvent(pomodoroEvent);
+  };
+
   return (
     <div className={`min-h-screen ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-gray-100 text-gray-900'}`}>
       <div className="container mx-auto px-4 py-8">
-        {/* ✅ Header with ONLY ONE Google Drive Button */}
+        {/* ✅ Header with Google Drive & Calendar Buttons */}
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center">
             <GraduationCap size={32} className="text-blue-600 mr-2" />
-            <h1 className="text-3xl font-bold">Student Dashboard</h1>
+            <h1 className="text-3xl font-bold">STUDBUD</h1>
           </div>
           <div className="flex gap-4">
             <DarkModeToggle darkMode={darkMode} setDarkMode={setDarkMode} />
@@ -128,6 +135,9 @@ function App() {
         onClose={() => setEditingSubject(null)}
         onSave={handleSaveEdit}
       />
+
+      {/* ✅ JARVIS ChatBot */}
+      <ChatBot toggleDarkMode={() => setDarkMode(!darkMode)} controlPomodoro={handlePomodoroControl} />
     </div>
   );
 }
