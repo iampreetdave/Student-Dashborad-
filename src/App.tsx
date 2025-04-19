@@ -10,6 +10,7 @@ import { GraduationCap } from 'lucide-react';
 import DarkModeToggle from './components/DarkModeToggle';
 import QuoteBox from './components/QuoteBox';
 import ChatBot from './components/ChatBot'; // ✅ Import Jarvis
+//hi
 
 /* 🔥 Global variables to persist tab references across re-renders */
 let googleDriveTab: Window | null = null;
